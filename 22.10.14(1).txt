@@ -1,0 +1,98 @@
+SQL> select num,content,regdate from todo
+  2  ;
+
+선택된 레코드가 없습니다.
+
+SQL> create sequence todo_seq;
+
+시퀀스가 생성되었습니다.
+
+SQL> insert into todo
+  2  (num,content,redate)
+  3  values(todo_seq.nextval,'html study', sysdate);
+(num,content,redate)
+             *
+2행에 오류:
+ORA-00904: "REDATE": 부적합한 식별자 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  insert into todo
+  2  (num,content,regdate)
+  3* values(todo_seq.nextval,'html study', sysdate)
+SQL> /
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into todo
+  2  (num,content, regdate)
+  3  values(todo_seq.nexval,'css study', sysdate);
+values(todo_seq.nexval,'css study', sysdate)
+                *
+3행에 오류:
+ORA-00984: 열을 사용할 수 없습니다 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  insert into todo
+  2  (num,content, regdate)
+  3* values(todo_seq.nextval, 'css study', sysdate)
+SQL> /
+
+1 개의 행이 만들어졌습니다.
+
+SQL> insert into todo
+  2  (num, content, regdate)
+  3  value(3, '',sysdate);
+value(3, '',sysdate)
+*
+3행에 오류:
+ORA-00926: 누락된 VALUES 키워드 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  insert into todo
+  2  (num, content, regdate)
+  3* values(3, '',sysdate)
+SQL> /
+
+1 개의 행이 만들어졌습니다.
+
+SQL> select num,content, regdate form todo;
+select num,content, regdate form todo
+                                 *
+1행에 오류:
+ORA-00923: FROM 키워드가 필요한 위치에 없습니다. 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1* select num,content, regdate from todo
+SQL> /
+
+       NUM CONTENT                                  REGDATE                     
+---------- ---------------------------------------- --------                    
+         1 html study                               22/10/14                    
+         2 css study                                22/10/14                    
+         3                                          22/10/14                    
+
+SQL> 
+SQL> commit
+  2  ;
+
+커밋이 완료되었습니다.
+
+SQL> update todo
+  2  set content='java study'
+  3  where num=3;
+
+1 행이 갱신되었습니다.
+
+SQL> spool off

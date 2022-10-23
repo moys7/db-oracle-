@@ -1,0 +1,154 @@
+SQL> select empno, ename, deptno
+  2  from emp
+  3  where deptno in(10,20);
+
+     EMPNO ENAME          DEPTNO                                                                    
+---------- ---------- ----------                                                                    
+      7369 SMITH              20                                                                    
+      7566 JONES              20                                                                    
+      7782 CLARK              10                                                                    
+      7839 KING               10                                                                    
+      7902 FORD               20                                                                    
+      7934 MILLER             10                                                                    
+
+6 개의 행이 선택되었습니다.
+
+SQL> select deptno
+  2  from emp
+  3  where job='salesman';
+
+선택된 레코드가 없습니다.
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  select deptno
+  2  from emp
+  3* where job='SALEMAN'
+SQL> /
+
+선택된 레코드가 없습니다.
+
+SQL> SELECT DEPTNO
+  2  FORM EMP
+  3  WHERE H=JOB='CLERK';
+FORM EMP
+     *
+2행에 오류:
+ORA-00923: FROM 키워드가 필요한 위치에 없습니다. 
+
+
+SQL> ED
+file afiedt.buf(이)가 기록되었습니다
+
+  1  SELECT DEPTNO
+  2  FROM EMP
+  3* WHERE H=JOB='CLERK'
+SQL> /
+WHERE H=JOB='CLERK'
+           *
+3행에 오류:
+ORA-00933: SQL 명령어가 올바르게 종료되지 않았습니다 
+
+
+SQL> select deptno
+  2  from emp
+  3  where sal>=3000;
+
+    DEPTNO                                                                                          
+----------                                                                                          
+        10                                                                                          
+        20                                                                                          
+
+SQL> select empno,ename,deptno
+  2  from emp
+  3  where deptno in(select deptno from emp where sal>=3000);
+
+     EMPNO ENAME          DEPTNO                                                                    
+---------- ---------- ----------                                                                    
+      7934 MILLER             10                                                                    
+      7839 KING               10                                                                    
+      7782 CLARK              10                                                                    
+      7902 FORD               20                                                                    
+      7566 JONES              20                                                                    
+      7369 SMITH              20                                                                    
+
+6 개의 행이 선택되었습니다.
+
+SQL> ??걍 실험
+SP2-0172: 이 항목에 해당하는 도움말을 찾을 수 없습니다.
+SQL> 했는데 수업에서 나옴 그대로 이어서 진행
+SP2-0734: "했는데 수..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select empno,ename,deptno
+  2  from emp
+  3  where deptno in(10,20);
+
+     EMPNO ENAME          DEPTNO                                                                    
+---------- ---------- ----------                                                                    
+      7369 SMITH              20                                                                    
+      7566 JONES              20                                                                    
+      7782 CLARK              10                                                                    
+      7839 KING               10                                                                    
+      7902 FORD               20                                                                    
+      7934 MILLER             10                                                                    
+
+6 개의 행이 선택되었습니다.
+
+SQL> 와같다
+SP2-0042: 알 수 없는 명령어 "와같다" - 나머지 줄 무시.
+SQL> select ename,sal,hiredate
+  2  from emp
+  3  where like '%I%'
+  4  ;
+where like '%I%'
+      *
+3행에 오류:
+ORA-00936: 누락된 표현식 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  select ename,sal,hiredate
+  2  from emp
+  3* where ename like '%I%'
+  4  /
+
+ENAME             SAL HIREDATE                                                                      
+---------- ---------- --------                                                                      
+SMITH             800 80/12/17                                                                      
+MARTIN           1250 81/09/28                                                                      
+KING             5000 81/11/17                                                                      
+MILLER           1300 82/01/23                                                                      
+
+SQL> select ename '의 입사일은'||hiredate||'입니다.' from emp;
+select ename '의 입사일은'||hiredate||'입니다.' from emp
+             *
+1행에 오류:
+ORA-00923: FROM 키워드가 필요한 위치에 없습니다. 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1* select ename|| '의 입사일은'||hiredate||'입니다.' from emp
+SQL> /
+
+ENAME||'의입사일은'||HIREDATE||'입니다.'                                                            
+----------------------------------------------------------------------------------------            
+SMITH의 입사일은80/12/17입니다.                                                                     
+ALLEN의 입사일은81/02/20입니다.                                                                     
+WARD의 입사일은81/02/22입니다.                                                                      
+JONES의 입사일은81/04/02입니다.                                                                     
+MARTIN의 입사일은81/09/28입니다.                                                                    
+BLAKE의 입사일은81/05/01입니다.                                                                     
+CLARK의 입사일은81/06/09입니다.                                                                     
+KING의 입사일은81/11/17입니다.                                                                      
+TURNER의 입사일은81/09/08입니다.                                                                    
+JAMES의 입사일은81/12/03입니다.                                                                     
+FORD의 입사일은81/12/03입니다.                                                                      
+MILLER의 입사일은82/01/23입니다.                                                                    
+
+12 개의 행이 선택되었습니다.
+
+SQL> spool off

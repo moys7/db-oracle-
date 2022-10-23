@@ -1,0 +1,159 @@
+SQL> desc emp
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> desc dept
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL NUMBER(2)
+ DNAME                                              VARCHAR2(14)
+ LOC                                                VARCHAR2(13)
+
+SQL> select empn, ename, job from emp;
+select empn, ename, job from emp
+       *
+1행에 오류:
+ORA-00904: "EMPN": 부적합한 식별자 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1* select empno, ename, job from emp
+SQL> /
+
+     EMPNO ENAME                JOB                                             
+---------- -------------------- ------------------                              
+      7369 SMITH                CLERK                                           
+      7499 ALLEN                SALESMAN                                        
+      7521 WARD                 SALESMAN                                        
+      7566 JONES                MANAGER                                         
+      7654 MARTIN               SALESMAN                                        
+      7698 BLAKE                MANAGER                                         
+      7782 CLARK                MANAGER                                         
+      7839 KING                 PRESIDENT                                       
+      7844 TURNER               SALESMAN                                        
+      7900 JAMES                CLERK                                           
+      7902 FORD                 ANALYST                                         
+
+     EMPNO ENAME                JOB                                             
+---------- -------------------- ------------------                              
+      7934 MILLER               CLERK                                           
+
+12 개의 행이 선택되었습니다.
+
+SQL> 전체사원의 수는 열두명이다.
+SP2-0734: "전체사원의..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select empno, ename, job
+  2  from emp
+  3  order by empno ASC;
+
+     EMPNO ENAME                JOB                                             
+---------- -------------------- ------------------                              
+      7369 SMITH                CLERK                                           
+      7499 ALLEN                SALESMAN                                        
+      7521 WARD                 SALESMAN                                        
+      7566 JONES                MANAGER                                         
+      7654 MARTIN               SALESMAN                                        
+      7698 BLAKE                MANAGER                                         
+      7782 CLARK                MANAGER                                         
+      7839 KING                 PRESIDENT                                       
+      7844 TURNER               SALESMAN                                        
+      7900 JAMES                CLERK                                           
+      7902 FORD                 ANALYST                                         
+
+     EMPNO ENAME                JOB                                             
+---------- -------------------- ------------------                              
+      7934 MILLER               CLERK                                           
+
+12 개의 행이 선택되었습니다.
+
+SQL> 사원 넘버 오름차순 정렬
+SP2-0734: "사원 넘버 ..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select enam, sal
+  2  from emp
+  3  odered by sal desc;
+odered by sal desc
+       *
+3행에 오류:
+ORA-00933: SQL 명령어가 올바르게 종료되지 않았습니다 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  select ename, sal
+  2  from emp
+  3* odered by sal desc
+SQL> /
+odered by sal desc
+       *
+3행에 오류:
+ORA-00933: SQL 명령어가 올바르게 종료되지 않았습니다 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  select ename, sal
+  2  from emp
+  3* odered by sal desc
+SQL> 내림차순으로 샐러리 보려 했으나 실패
+SP2-0734: "내림차순으..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select job
+  2  from emp
+  3  where ename='king';
+
+선택된 레코드가 없습니다.
+
+SQL> select ename, sal
+  2  from emp
+  3  order by sal desc;
+
+ENAME                       SAL                                                 
+-------------------- ----------                                                 
+KING                       5000                                                 
+FORD                       3000                                                 
+JONES                      2975                                                 
+BLAKE                      2850                                                 
+CLARK                      2450                                                 
+ALLEN                      1600                                                 
+TURNER                     1500                                                 
+MILLER                     1300                                                 
+MARTIN                     1250                                                 
+WARD                       1250                                                 
+JAMES                       950                                                 
+
+ENAME                       SAL                                                 
+-------------------- ----------                                                 
+SMITH                       800                                                 
+
+12 개의 행이 선택되었습니다.
+
+SQL> select job
+  2  from emp
+  3  where ename='king';
+
+선택된 레코드가 없습니다.
+
+SQL> desc emp
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> spool off

@@ -1,0 +1,302 @@
+SQL>  select empno, job, ename
+  2   from emp;
+
+     EMPNO JOB                ENAME                                             
+---------- ------------------ --------------------                              
+      7369 CLERK              SMITH                                             
+      7499 SALESMAN           ALLEN                                             
+      7521 SALESMAN           WARD                                              
+      7566 MANAGER            JONES                                             
+      7654 SALESMAN           MARTIN                                            
+      7698 MANAGER            BLAKE                                             
+      7782 MANAGER            CLARK                                             
+      7839 PRESIDENT          KING                                              
+      7844 SALESMAN           TURNER                                            
+      7900 CLERK              JAMES                                             
+      7902 ANALYST            FORD                                              
+
+     EMPNO JOB                ENAME                                             
+---------- ------------------ --------------------                              
+      7934 CLERK              MILLER                                            
+
+12 개의 행이 선택되었습니다.
+
+SQL> select empno, sal, septno
+  2  from emp
+  3  oder by desc;
+oder by desc
+     *
+3행에 오류:
+ORA-00933: SQL 명령어가 올바르게 종료되지 않았습니다 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  select empno, sal, septno
+  2  from emp
+  3* order by desc
+SQL> /
+order by desc
+         *
+3행에 오류:
+ORA-00936: 누락된 표현식 
+
+
+SQL> ed
+file afiedt.buf(이)가 기록되었습니다
+
+  1  select empno, sal, deptno
+  2  from emp
+  3* order by desc
+SQL> /
+order by desc
+         *
+3행에 오류:
+ORA-00936: 누락된 표현식 
+
+
+SQL> select empno, sal, hiredate
+  2  from emp
+  3  order by sal asc;
+
+     EMPNO        SAL HIREDATE                                                  
+---------- ---------- --------                                                  
+      7369        800 80/12/17                                                  
+      7900        950 81/12/03                                                  
+      7521       1250 81/02/22                                                  
+      7654       1250 81/09/28                                                  
+      7934       1300 82/01/23                                                  
+      7844       1500 81/09/08                                                  
+      7499       1600 81/02/20                                                  
+      7782       2450 81/06/09                                                  
+      7698       2850 81/05/01                                                  
+      7566       2975 81/04/02                                                  
+      7902       3000 81/12/03                                                  
+
+     EMPNO        SAL HIREDATE                                                  
+---------- ---------- --------                                                  
+      7839       5000 81/11/17                                                  
+
+12 개의 행이 선택되었습니다.
+
+SQL> select job, sal
+  2  from emp
+  3  order by job asc, sal desc;
+
+JOB                       SAL                                                   
+------------------ ----------                                                   
+ANALYST                  3000                                                   
+CLERK                    1300                                                   
+CLERK                     950                                                   
+CLERK                     800                                                   
+MANAGER                  2975                                                   
+MANAGER                  2850                                                   
+MANAGER                  2450                                                   
+PRESIDENT                5000                                                   
+SALESMAN                 1600                                                   
+SALESMAN                 1500                                                   
+SALESMAN                 1250                                                   
+
+JOB                       SAL                                                   
+------------------ ----------                                                   
+SALESMAN                 1250                                                   
+
+12 개의 행이 선택되었습니다.
+
+SQL> 정렬을 여러번 할 수 있다.
+SP2-0734: "정렬을 여..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> 같은 직업끼리 뭉친다 알파벳 순서 빠른 순서 부터 같은 직업끼리 봉급비교 가능!!!
+SP2-0734: "같은 직업..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select empno,ename,sal
+  2  from emp
+  3  where sal>=2000;
+
+     EMPNO ENAME                       SAL                                      
+---------- -------------------- ----------                                      
+      7566 JONES                      2975                                      
+      7698 BLAKE                      2850                                      
+      7782 CLARK                      2450                                      
+      7839 KING                       5000                                      
+      7902 FORD                       3000                                      
+
+SQL> 2000이상 버는 사원번호 명 급여 확인
+SP2-0734: "2000이상 ..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select ename, sal
+  2  from emp
+  3  where sal>=2000, oder by sal desc;
+where sal>=2000, oder by sal desc
+               *
+3행에 오류:
+ORA-00933: SQL 명령어가 올바르게 종료되지 않았습니다 
+
+
+SQL> select*
+  2  form emp
+  3  where deptno=10;
+form emp
+*
+2행에 오류:
+ORA-00923: FROM 키워드가 필요한 위치에 없습니다. 
+
+
+SQL> select*
+  2  from emp
+  3  where deptno=10;
+
+     EMPNO ENAME                JOB                       MGR HIREDATE          
+---------- -------------------- ------------------ ---------- --------          
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7782 CLARK                MANAGER                  7839 81/06/09          
+      2450                    10                                                
+                                                                                
+      7839 KING                 PRESIDENT                     81/11/17          
+      5000                    10                                                
+                                                                                
+      7934 MILLER               CLERK                    7782 82/01/23          
+      1300                    10                                                
+                                                                                
+
+SQL> 칸이 부족해서 2줄로 나온다.
+SP2-0734: "칸이 부족..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select empno, ename, hiredate
+  2  from emp
+  3  where hiredate='81/02/20';
+
+     EMPNO ENAME                HIREDATE                                        
+---------- -------------------- --------                                        
+      7499 ALLEN                81/02/20                                        
+
+SQL> 20년2월 20일에 입사한 사원
+SP2-0734: "20년2월 20..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> select*
+  2  from emp
+  3  ;
+
+     EMPNO ENAME                JOB                       MGR HIREDATE          
+---------- -------------------- ------------------ ---------- --------          
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7369 SMITH                CLERK                    7902 80/12/17          
+       800                    20                                                
+                                                                                
+      7499 ALLEN                SALESMAN                 7698 81/02/20          
+      1600        300         30                                                
+                                                                                
+      7521 WARD                 SALESMAN                 7698 81/02/22          
+      1250        500         30                                                
+                                                                                
+
+     EMPNO ENAME                JOB                       MGR HIREDATE          
+---------- -------------------- ------------------ ---------- --------          
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7566 JONES                MANAGER                  7839 81/04/02          
+      2975                    20                                                
+                                                                                
+      7654 MARTIN               SALESMAN                 7698 81/09/28          
+      1250       1400         30                                                
+                                                                                
+      7698 BLAKE                MANAGER                  7839 81/05/01          
+      2850                    30                                                
+                                                                                
+
+     EMPNO ENAME                JOB                       MGR HIREDATE          
+---------- -------------------- ------------------ ---------- --------          
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7782 CLARK                MANAGER                  7839 81/06/09          
+      2450                    10                                                
+                                                                                
+      7839 KING                 PRESIDENT                     81/11/17          
+      5000                    10                                                
+                                                                                
+      7844 TURNER               SALESMAN                 7698 81/09/08          
+      1500          0         30                                                
+                                                                                
+
+     EMPNO ENAME                JOB                       MGR HIREDATE          
+---------- -------------------- ------------------ ---------- --------          
+       SAL       COMM     DEPTNO                                                
+---------- ---------- ----------                                                
+      7900 JAMES                CLERK                    7698 81/12/03          
+       950                    30                                                
+                                                                                
+      7902 FORD                 ANALYST                  7566 81/12/03          
+      3000                    20                                                
+                                                                                
+      7934 MILLER               CLERK                    7782 82/01/23          
+      1300                    10                                                
+                                                                                
+
+12 개의 행이 선택되었습니다.
+
+SQL> 2중로 나와서 불편 그러면
+SP2-0734: "2중로 나와..."(으)로 시작되는 알 수 없는 명령 - 나머지 줄은 무시되었습니다.
+SQL> set linesize 100
+SQL> column ename format a10
+SQL> column job format a10
+SQL> select* from emp;
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7369 SMITH      CLERK            7902 80/12/17        800                    20               
+      7499 ALLEN      SALESMAN         7698 81/02/20       1600        300         30               
+      7521 WARD       SALESMAN         7698 81/02/22       1250        500         30               
+      7566 JONES      MANAGER          7839 81/04/02       2975                    20               
+      7654 MARTIN     SALESMAN         7698 81/09/28       1250       1400         30               
+      7698 BLAKE      MANAGER          7839 81/05/01       2850                    30               
+      7782 CLARK      MANAGER          7839 81/06/09       2450                    10               
+      7839 KING       PRESIDENT             81/11/17       5000                    10               
+      7844 TURNER     SALESMAN         7698 81/09/08       1500          0         30               
+      7900 JAMES      CLERK            7698 81/12/03        950                    30               
+      7902 FORD       ANALYST          7566 81/12/03       3000                    20               
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7934 MILLER     CLERK            7782 82/01/23       1300                    10               
+
+12 개의 행이 선택되었습니다.
+
+SQL> set pagesize 5
+SQL> select* from emp;
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7369 SMITH      CLERK            7902 80/12/17        800                    20               
+      7499 ALLEN      SALESMAN         7698 81/02/20       1600        300         30               
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7521 WARD       SALESMAN         7698 81/02/22       1250        500         30               
+      7566 JONES      MANAGER          7839 81/04/02       2975                    20               
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7654 MARTIN     SALESMAN         7698 81/09/28       1250       1400         30               
+      7698 BLAKE      MANAGER          7839 81/05/01       2850                    30               
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7782 CLARK      MANAGER          7839 81/06/09       2450                    10               
+      7839 KING       PRESIDENT             81/11/17       5000                    10               
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7844 TURNER     SALESMAN         7698 81/09/08       1500          0         30               
+      7900 JAMES      CLERK            7698 81/12/03        950                    30               
+
+     EMPNO ENAME      JOB               MGR HIREDATE        SAL       COMM     DEPTNO               
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------               
+      7902 FORD       ANALYST          7566 81/12/03       3000                    20               
+      7934 MILLER     CLERK            7782 82/01/23       1300                    10               
+
+12 개의 행이 선택되었습니다.
+
+SQL> set pagesize 20
+SQL> host
+
+SQL> spooloff
+SP2-0042: 알 수 없는 명령어 "spooloff" - 나머지 줄 무시.
+SQL> spool off
